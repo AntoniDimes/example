@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Schedule
+{% endblock %}
+
+{% block body %}
+    {# Ask for the user input #}
+    <form method="POST">
+        <label for="team">Enter Team Name:</label>
+        <input type="text" id="team" name="team" oninput="filterTeams()" list="teamSuggestions">
+        <datalist id="teamSuggestions"></datalist>
+        <button type="submit">Get Schedule</button>
+    </form>
+    {# Show the game of the the team the user typed in #}
+    {% if schedule %}
+        <h2>Upcoming Matches</h2>
+        <ul>
+            {% for match in schedule %}
+                <li>
+                    (Home)<strong>{{ match.home_team }}</strong> vs <strong>{{ match.away_team }}</strong>(Away)<br>
+                    Date: {{ match.date }}<br>
+                    Time: {{ match.time }} (CET)<br>
+                    Status: {{ match.status }}<br>
+                    Competition: {{ match.competition }}<br>
+                    {% if match.status == "Match finished" %}
+                        Score: {{ match.score }}<br>
+                    {% endif %}
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% else %}
+        {% if error %}
+            <p>{{ error }}</p>
+        {% endif %}
+    {% endif %}
+    {# List the name that close to the user input #}
+    <script>
+        const teams = {{ teams | tojson }};
+        console.log(teams);
+        const suggestions = document.getElementById("teamSuggestions");
+
+        function filterTeams() {
+            const input = document.getElementById("team").value.toLowerCase();
+            suggestions.innerHTML = "";
+
+            teams.forEach(team => {
+                if (team.toLowerCase().startsWith(input)) {
+                    const option = document.createElement("option");
+                    option.value = team;
+                    suggestions.appendChild(option);
+                }
+            });
+        }
+    </script>
+{% endblock %}
+

@@ -1,0 +1,27 @@
+.navbar, .container-fluid {
+    background-color: #6CABDD !important;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar .navbar-brand, .navbar .nav-link {
+    color: white !important;
+}
+#suggestions {
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute;
+    background-color: white;
+    z-index: 999;
+}
+
+.suggestion-item {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}

@@ -1,41 +1,86 @@
 {% extends "layout.html" %}
 
-{% block title %}
-    Schedule
-{% endblock %}
+{% block title %}Schedule{% endblock %}
 
 {% block body %}
-    {# Ask for the user input #}
-    <form method="POST">
-        <label for="team">Enter Team Name:</label>
-        <input type="text" id="team" name="team" oninput="filterTeams()" list="teamSuggestions">
-        <datalist id="teamSuggestions"></datalist>
-        <button type="submit">Get Schedule</button>
-    </form>
-    {# Show the game of the the team the user typed in #}
-    {% if schedule %}
-        <h2>Upcoming Matches</h2>
-        <ul>
-            {% for match in schedule %}
-                <li>
-                    (Home)<strong>{{ match.home_team }}</strong> vs <strong>{{ match.away_team }}</strong>(Away)<br>
-                    Date: {{ match.date }}<br>
-                    Time: {{ match.time }} (CET)<br>
-                    Status: {{ match.status }}<br>
-                    Competition: {{ match.competition }}<br>
-                    {% if match.status == "Match finished" %}
-                        Score: {{ match.score }}<br>
-                    {% endif %}
-                </li>
-                <hr>
-            {% endfor %}
-        </ul>
-    {% else %}
+    <div class="container py-5">
+        <h1 class="text-center mb-4">Team Schedule Finder</h1>
+        
+        <!-- Search Form -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <div class="schedule-form">
+                    <form method="POST" class="d-flex align-items-center flex-wrap">
+                        <label for="team" class="me-2"><i class="fas fa-search me-1"></i> Team Name:</label>
+                        <div class="flex-grow-1 position-relative">
+                            <input type="text" id="team" name="team" class="form-control" oninput="filterTeams()" list="teamSuggestions" placeholder="Enter team name...">
+                            <datalist id="teamSuggestions"></datalist>
+                        </div>
+                        <button type="submit" class="btn btn-primary ms-2"><i class="fas fa-calendar-alt me-1"></i> Get Schedule</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Error Message -->
         {% if error %}
-            <p>{{ error }}</p>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-circle me-2"></i> {{ error }}
+                    </div>
+                </div>
+            </div>
         {% endif %}
-    {% endif %}
-    {# List the name that close to the user input #}
+        
+        <!-- Schedule Results -->
+        {% if schedule %}
+            <h2 class="text-center mb-4">Upcoming Matches</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    {% for match in schedule %}
+                        <div class="match-card">
+                            <div class="match-teams">
+                                <span class="home-team">{{ match.home_team }}</span>
+                                <span class="vs"> vs </span>
+                                <span class="away-team">{{ match.away_team }}</span>
+                            </div>
+                            <div class="match-info">
+                                <i class="far fa-calendar-alt me-2"></i> Date: {{ match.date }}
+                            </div>
+                            <div class="match-info">
+                                <i class="far fa-clock me-2"></i> Time: {{ match.time }} (CET)
+                            </div>
+                            <div class="match-info">
+                                <i class="fas fa-trophy me-2"></i> Competition: {{ match.competition }}
+                            </div>
+                            <div class="match-status">
+                                <i class="fas fa-info-circle me-2"></i> Status: {{ match.status }}
+                            </div>
+                            {% if match.status == "Match finished" %}
+                                <div class="match-score mt-2">
+                                    <i class="fas fa-futbol me-2"></i> Score: {{ match.score }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            {% if not error %}
+                <div class="text-center mt-5">
+                    <div class="feature-box">
+                        <i class="fas fa-info-circle mb-3" style="font-size: 3rem;"></i>
+                        <h3>Search for a Team</h3>
+                        <p>Enter a team name above to see their upcoming schedule and match results.</p>
+                        <p>You can search for teams from Premier League, La Liga, Serie A, Bundesliga, and more!</p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <!-- Team Suggestions Script -->
     <script>
         const teams = {{ teams | tojson }};
         console.log(teams);
@@ -45,8 +90,10 @@
             const input = document.getElementById("team").value.toLowerCase();
             suggestions.innerHTML = "";
 
+            if (input.length < 1) return;
+
             teams.forEach(team => {
-                if (team.toLowerCase().startsWith(input)) {
+                if (team.toLowerCase().includes(input)) {
                     const option = document.createElement("option");
                     option.value = team;
                     suggestions.appendChild(option);

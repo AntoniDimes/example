@@ -1,10 +1,109 @@
 {% extends "layout.html" %}
 
-{% block title %}
-    Homepage
-{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body %}
-    <h1>Welcome to the Soccer Schedule Page</h1>
-{% endblock %}
+    <!-- Hero Section -->
+    <section class="hero text-center">
+        <div class="container">
+            <h1>Soccer Schedule Tracker</h1>
+            <p>Stay up-to-date with your favorite soccer teams' matches from the top leagues around the world.</p>
+            <a href="/schedule" class="btn btn-primary btn-lg">Check Schedules</a>
+        </div>
+    </section>
 
+    <!-- Features Section -->
+    <section class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <i class="fas fa-search mb-3"></i>
+                    <h3>Find Teams</h3>
+                    <p>Search for your favorite teams from the top leagues including Premier League, La Liga, Serie A, Bundesliga, and more.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <i class="fas fa-calendar-alt mb-3"></i>
+                    <h3>View Schedules</h3>
+                    <p>Get detailed match schedules including dates, times, competitions, and opponents for upcoming games.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <i class="fas fa-trophy mb-3"></i>
+                    <h3>Track Results</h3>
+                    <p>Stay updated with match results and scores for games that have already been played.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leagues Section -->
+    <section class="container mt-5">
+        <h2 class="text-center mb-4">Top Leagues Available</h2>
+        <div class="row">
+            <div class="col-md-3 col-6 mb-4">
+                <div class="feature-box text-center">
+                    <h4>Premier League</h4>
+                    <p>England</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="feature-box text-center">
+                    <h4>La Liga</h4>
+                    <p>Spain</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="feature-box text-center">
+                    <h4>Serie A</h4>
+                    <p>Italy</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="feature-box text-center">
+                    <h4>Bundesliga</h4>
+                    <p>Germany</p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-3">
+            <a href="/schedule" class="btn btn-primary">Check Team Schedules</a>
+        </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section class="container mt-5">
+        <h2 class="text-center mb-4">How to Use</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <div class="mb-3">
+                        <span class="badge bg-primary rounded-circle p-3">1</span>
+                    </div>
+                    <h3>Go to Schedule</h3>
+                    <p>Navigate to the Schedule page using the navigation menu</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <div class="mb-3">
+                        <span class="badge bg-primary rounded-circle p-3">2</span>
+                    </div>
+                    <h3>Enter Team Name</h3>
+                    <p>Type in your favorite team's name in the search box</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <div class="mb-3">
+                        <span class="badge bg-primary rounded-circle p-3">3</span>
+                    </div>
+                    <h3>View Results</h3>
+                    <p>Get instant access to upcoming matches and results</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

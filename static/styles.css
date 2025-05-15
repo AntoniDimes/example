@@ -1,27 +1,232 @@
+/* Global styles */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navigation bar */
 .navbar, .container-fluid {
-    background-color: #6CABDD !important;
+    background-color: #1a3a5f !important;
     border: none;
-    margin: 0;
-    padding: 0;
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .navbar .navbar-brand, .navbar .nav-link {
     color: white !important;
+    font-weight: 600;
+    transition: color 0.3s;
 }
+
+.navbar .nav-link:hover {
+    color: #6CABDD !important;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    padding-left: 15px;
+}
+
+/* Main content */
+.container {
+    padding: 30px 15px;
+}
+
+/* Feature boxes */
+.feature-box {
+    background-color: white;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.feature-box h3 {
+    color: #1a3a5f;
+    margin-bottom: 15px;
+}
+
+.feature-box i {
+    font-size: 2.5rem;
+    color: #6CABDD;
+    margin-bottom: 15px;
+}
+
+/* Hero section */
+.hero {
+    background: linear-gradient(135deg, #1a3a5f 0%, #2c5282 100%);
+    color: white;
+    padding: 60px 0;
+    margin-bottom: 40px;
+    border-radius: 0 0 10px 10px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 30px;
+}
+
+.btn-primary {
+    background-color: #6CABDD;
+    border-color: #6CABDD;
+    padding: 10px 25px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #5a9ac9;
+    border-color: #5a9ac9;
+    transform: translateY(-2px);
+}
+
+/* Schedule page */
+.schedule-form {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.schedule-form label {
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.schedule-form input {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.schedule-form button {
+    background-color: #1a3a5f;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.schedule-form button:hover {
+    background-color: #2c5282;
+}
+
+.match-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.match-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background-color: #6CABDD;
+}
+
+.match-teams {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #1a3a5f;
+}
+
+.match-info {
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.match-status {
+    font-weight: 600;
+    color: #6CABDD;
+}
+
+.match-score {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a3a5f;
+}
+
+/* Team suggestions */
 #suggestions {
-    border: 1px solid #ccc;
-    max-height: 150px;
+    border: 1px solid #ddd;
+    max-height: 200px;
     overflow-y: auto;
     position: absolute;
     background-color: white;
     z-index: 999;
+    width: 100%;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .suggestion-item {
-    padding: 8px;
+    padding: 10px 15px;
     cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
 }
 
 .suggestion-item:hover {
-    background-color: #f0f0f0;
+    background-color: #f5f7fa;
+}
+
+/* Error message */
+.error-message {
+    color: #e74c3c;
+    background-color: #fdf1f0;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border-left: 4px solid #e74c3c;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero {
+        padding: 40px 0;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .feature-box {
+        margin-bottom: 20px;
+    }
+    
+    .schedule-form {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .schedule-form input {
+        margin-bottom: 10px;
+        width: 100%;
+    }
 }
